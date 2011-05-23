@@ -1,0 +1,41 @@
+#!/usr/bin/env perl
+
+package
+    supervise_me;
+
+use strict;
+use warnings;
+use App::SuperviseMe;
+
+# ABSTRACT: supervises a list of commands
+
+App::SuperviseMe->new_from_options->run;
+
+
+
+=pod
+
+=head1 NAME
+
+supervise_me - supervises a list of commands
+
+=head1 VERSION
+
+version 0.001
+
+=head1 AUTHOR
+
+Pedro Melo <melo@simplicidade.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2011 by Pedro Melo.
+
+This is free software, licensed under:
+
+  The Artistic License 2.0
+
+=cut
+
+
+__END__
