@@ -27,7 +27,7 @@ sub new_from_options {
 
   my @cmds;
   while (my $l = <STDIN>) {
-    chomp;
+    chomp $l;
     $l =~ s/^\s+|\s+$//g;
     next unless $l;
     next if $l =~ /^#/;
