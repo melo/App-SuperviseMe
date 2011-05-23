@@ -7,16 +7,18 @@ BEGIN {
 
 use strict;
 use warnings;
+use Carp 'croak';
 
 sub new {
-  my ($class, $args) = @_;
-  my %info;
+  my ($class, %args) = @_;
 
-  my $cmds = delete $args->{cmds};
+  my $cmds = delete($args->{cmds}) || [];
   $cmds = [$cmds] unless ref($cmds) eq 'ARRAY';
-  $info{cmds} = $cmds;
+  map { $_ = ref($_) ? $_ : {cmd => $_} } @$cmds;
 
-  return bless \%info, $class;
+  croak(q{Missing 'cmds',}) unless @$cmds;
+
+  return bless {cmds => $cmds}, $class;
 }
 
 
@@ -35,7 +37,7 @@ sub new_from_options {
     push @cmds, {cmd => $l};
   }
 
-  return $class->new({cmds => \@cmds});
+  return $class->new(cmds => \@cmds);
 }
 
 
