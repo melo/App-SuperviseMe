@@ -19,4 +19,29 @@ sub new {
 }
 
 
+sub new_from_options {
+  my ($class) = @_;
+
+  _out('Enter commands to supervise, one per line');
+
+  my @cmds;
+  while (my $l = <STDIN>) {
+    chomp $l;
+    $l =~ s/^\s+|\s+$//g;
+    next unless $l;
+    next if $l =~ /^#/;
+
+    push @cmds, {cmd => $l};
+  }
+
+  return $class->new(cmds => \@cmds);
+}
+
+
+sub _out {
+  return unless -t \*STDOUT && -t \*STDIN;
+
+  print @_, "\n";
+}
+
 1;

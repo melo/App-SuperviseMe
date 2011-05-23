@@ -6,6 +6,7 @@ use Test::More;
 use Test::Deep;
 use Test::Fatal;
 use App::SuperviseMe;
+use IO::String;
 
 subtest 'basic constructor' => sub {
   my $sm;
@@ -39,6 +40,26 @@ subtest 'basic constructor' => sub {
     exception { App::SuperviseMe->new },
     qr{^Missing 'cmds',},
     'new() dies with no cmds list'
+  );
+};
+
+
+subtest 'read commands from STDIN' => sub {
+  local *STDIN = my $io = IO::String->new(<<"  EOF");
+ x1
+   
+     # asdasdasd 
+      x2 
+
+  EOF
+  my $sm = App::SuperviseMe->new_from_options;
+
+  ok($sm, 'Got a SuperviseMe...');
+  is(ref($sm), 'App::SuperviseMe', '... of the proper type');
+  cmp_deeply(
+    $sm->{cmds},
+    [{cmd => 'x1',}, {cmd => 'x2',}],
+    '... with the expected cmds list'
   );
 };
 
