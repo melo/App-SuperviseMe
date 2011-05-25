@@ -36,7 +36,7 @@ version 0.001
     $ cat script.me
     plackup -p 3010 ./sites/x/app.psgi
     plackup -p 3011 ./sites/y/app.psgi
-    $ supervise_me < script.me    
+    $ supervise_me < script.me
 
 =head1 DESCRIPTION
 
