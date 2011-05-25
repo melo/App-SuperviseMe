@@ -34,7 +34,7 @@ sub new_from_options {
     next unless $l;
     next if $l =~ /^#/;
 
-    push @cmds, {cmd => $l};
+    push @cmds, $l;
   }
 
   return $class->new(cmds => \@cmds);
