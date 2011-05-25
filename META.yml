@@ -3,7 +3,10 @@ abstract: 'very simple command superviser'
 author:
   - 'Pedro Melo <melo@simplicidade.org>'
 build_requires:
-  Test::More: 0.92
+  IO::String: 0
+  Test::Deep: 0
+  Test::Fatal: 0
+  Test::More: 0.96
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0

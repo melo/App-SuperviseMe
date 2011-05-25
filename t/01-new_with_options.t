@@ -10,13 +10,24 @@ use IO::String;
 
 subtest 'basic constructor' => sub {
   my $sm;
+
   is(exception { $sm = App::SuperviseMe->new(cmds => ['a']) },
-    undef, 'new() lives');
+    undef, 'new() lives with a simple command');
   ok($sm, '... got something back');
   is(ref($sm), 'App::SuperviseMe', '... of the proper type');
   cmp_deeply(
     $sm->{cmds},
     [{cmd => 'a'}],
+    '... with the expected command list'
+  );
+
+  is(exception { $sm = App::SuperviseMe->new(cmds => ['a', {cmd => 'b'}]) },
+    undef, 'new() lives with two commands, one simple, one complex');
+  ok($sm, '... got something back');
+  is(ref($sm), 'App::SuperviseMe', '... of the proper type');
+  cmp_deeply(
+    $sm->{cmds},
+    [{cmd => 'a'}, {cmd => 'b'}],
     '... with the expected command list'
   );
 
@@ -32,24 +43,25 @@ subtest 'basic constructor' => sub {
   );
 };
 
-my $sm = do {
-  my $io = IO::String->new(<<"  EOF");
+
+subtest 'read commands from STDIN' => sub {
+  local *STDIN = my $io = IO::String->new(<<"  EOF");
  x1
    
      # asdasdasd 
       x2 
 
   EOF
-  local *STDIN = $io;
-  App::SuperviseMe->new_from_options;
+  my $sm = App::SuperviseMe->new_from_options;
+
+  ok($sm, 'Got a SuperviseMe...');
+  is(ref($sm), 'App::SuperviseMe', '... of the proper type');
+  cmp_deeply(
+    $sm->{cmds},
+    [{cmd => 'x1',}, {cmd => 'x2',}],
+    '... with the expected cmds list'
+  );
 };
 
-ok($sm, 'Got a SuperviseMe...');
-is(ref($sm), 'App::SuperviseMe', '... of the proper type');
-cmp_deeply(
-  $sm->{cmds},
-  [{cmd => 'x1',}, {cmd => 'x2',}],
-  '... with the expected cmds list'
-);
 
 done_testing();

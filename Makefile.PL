@@ -12,7 +12,10 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'very simple command superviser',
   'AUTHOR' => 'Pedro Melo <melo@simplicidade.org>',
   'BUILD_REQUIRES' => {
-    'Test::More' => '0.92'
+    'IO::String' => '0',
+    'Test::Deep' => '0',
+    'Test::Fatal' => '0',
+    'Test::More' => '0.96'
   },
   'CONFIGURE_REQUIRES' => {
     'ExtUtils::MakeMaker' => '6.30'

@@ -21,7 +21,10 @@
       },
       "test" : {
          "requires" : {
-            "Test::More" : "0.92"
+            "IO::String" : 0,
+            "Test::Deep" : 0,
+            "Test::Fatal" : 0,
+            "Test::More" : "0.96"
          }
       }
    },

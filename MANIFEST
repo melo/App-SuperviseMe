@@ -16,4 +16,3 @@ t/release-no-tabs.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 weaver.ini
-x.pl
