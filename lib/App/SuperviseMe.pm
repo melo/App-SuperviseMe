@@ -146,7 +146,8 @@ sub _error {
 
 1;
 
-__END__
+
+
 =pod
 
 =head1 NAME
@@ -156,6 +157,30 @@ App::SuperviseMe - very simple command superviser
 =head1 VERSION
 
 version 0.001
+
+=head1 DESCRIPTION
+
+Yuppi!
+
+=head1 METHODS
+
+=head2 new
+
+=head2 new_from_options
+
+=head2 run
+
+=encoding utf8
+
+=head SYNOPSIS
+
+    my $superviser = App::SuperviseMe->new(
+        cmds => [
+          'plackup -p 3010 ./sites/x/app.psgi',
+          'plackup -p 3011 ./sites/y/app.psgi',
+        ],
+    );
+    $superviser->run;
 
 =head1 AUTHOR
 
@@ -170,4 +195,7 @@ This is free software, licensed under:
   The Artistic License 2.0
 
 =cut
+
+
+__END__
 

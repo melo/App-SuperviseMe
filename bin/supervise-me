@@ -23,6 +23,51 @@ supervise_me - supervises a list of commands
 
 version 0.001
 
+=head1 SYNOPSIS
+
+    # Read commands to keep up from STDIN
+    $ supervise_me
+    Enter commands to supervise, one per line
+    plackup -p 3010 ./sites/x/app.psgi
+    plackup -p 3011 ./sites/y/app.psgi
+    ^D
+    
+    # Script it
+    $ cat script.me
+    plackup -p 3010 ./sites/x/app.psgi
+    plackup -p 3011 ./sites/y/app.psgi
+    $ supervise_me < script.me    
+
+=head1 DESCRIPTION
+
+The C<supervise_me> command is a simple supervisor for multiple process.
+
+It reads a list of commands to execute from C<STDIN> and starts each one,
+and then monitors their execution. If one of the program dies, the supervisor
+will restart it after a small 1 second pause.
+
+You can exit the superviser with C<CTRL-C>, and all the child supervised
+processes will be killed.
+
+=encoding utf8
+
+=head1 ARGUMENTS
+
+The script accepts no arguments on the command line.
+
+=head1 OPTIONS
+
+The script doesn't have any command line options.
+
+=head1 ENVIRONMENT
+
+You can set the C<SUPERVISE_ME_DEBUG> environment variable to 1 to show
+debug information about the internal workings of the supervisor.
+
+=head1 SEE ALSO
+
+L<App::SuperviseMe>
+
 =head1 AUTHOR
 
 Pedro Melo <melo@simplicidade.org>
@@ -39,3 +84,4 @@ This is free software, licensed under:
 
 
 __END__
+

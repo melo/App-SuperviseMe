@@ -16,6 +16,9 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: App-SuperviseMe
+requires:
+  AnyEvent: 5.0
+  Carp: 0
 resources:
   homepage: http://search.cpan.org/dist/App-SuperviseMe/
   repository: http://github.com/melo/App-SuperviseMe.git

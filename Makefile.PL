@@ -26,7 +26,10 @@ my %WriteMakefileArgs = (
   ],
   'LICENSE' => 'artistic_2',
   'NAME' => 'App::SuperviseMe',
-  'PREREQ_PM' => {},
+  'PREREQ_PM' => {
+    'AnyEvent' => '5.0',
+    'Carp' => '0'
+  },
   'VERSION' => '0.001',
   'test' => {
     'TESTS' => 't/*.t'

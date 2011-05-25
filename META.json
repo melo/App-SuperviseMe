@@ -19,6 +19,12 @@
             "ExtUtils::MakeMaker" : "6.30"
          }
       },
+      "runtime" : {
+         "requires" : {
+            "AnyEvent" : "5.0",
+            "Carp" : 0
+         }
+      },
       "test" : {
          "requires" : {
             "IO::String" : 0,
