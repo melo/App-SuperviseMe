@@ -158,6 +158,16 @@ App::SuperviseMe - very simple command superviser
 
 version 0.001
 
+=head1 SYNOPSIS
+
+    my $superviser = App::SuperviseMe->new(
+        cmds => [
+          'plackup -p 3010 ./sites/x/app.psgi',
+          'plackup -p 3011 ./sites/y/app.psgi',
+        ],
+    );
+    $superviser->run;
+
 =head1 DESCRIPTION
 
 Yuppi!
@@ -171,16 +181,6 @@ Yuppi!
 =head2 run
 
 =encoding utf8
-
-=head SYNOPSIS
-
-    my $superviser = App::SuperviseMe->new(
-        cmds => [
-          'plackup -p 3010 ./sites/x/app.psgi',
-          'plackup -p 3011 ./sites/y/app.psgi',
-        ],
-    );
-    $superviser->run;
 
 =head1 AUTHOR
 
