@@ -1,0 +1,14 @@
+#!/usr/bin/env perl
+
+package
+    supervise_me;
+
+use strict;
+use warnings;
+use App::SuperviseMe;
+
+# ABSTRACT: supervises a list of commands
+
+App::SuperviseMe->new_from_options->run;
+
+__END__
