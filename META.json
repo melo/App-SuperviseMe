@@ -43,7 +43,7 @@
          "web" : "http://github.com/melo/App-SuperviseMe/"
       }
    },
-   "version" : "0.001",
+   "version" : "0.002",
    "x_Dist_Zilla" : {
       "plugins" : [
          {

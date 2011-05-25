@@ -30,7 +30,7 @@ my %WriteMakefileArgs = (
     'AnyEvent' => '5.0',
     'Carp' => '0'
   },
-  'VERSION' => '0.001',
+  'VERSION' => '0.002',
   'test' => {
     'TESTS' => 't/*.t'
   }

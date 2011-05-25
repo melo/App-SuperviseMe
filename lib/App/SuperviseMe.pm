@@ -1,6 +1,6 @@
 package App::SuperviseMe;
 BEGIN {
-  $App::SuperviseMe::VERSION = '0.001';
+  $App::SuperviseMe::VERSION = '0.002';
 }
 
 # ABSTRACT: very simple command superviser
@@ -159,7 +159,7 @@ App::SuperviseMe - very simple command superviser
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
