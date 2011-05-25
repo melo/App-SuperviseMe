@@ -10,6 +10,24 @@ use AnyEvent;
 ##############
 # Constructors
 
+=method new
+
+    my $supervisor = App::SuperviseMe->new( cmds => [...]);
+
+Creates a supervisor instance with a list of commands to monitor.
+
+It accepts a hash with the following options:
+
+=over 4
+
+=item cmds
+
+A list reference with the commands to execute and monitor.
+
+=back
+
+=cut
+
 sub new {
   my ($class, %args) = @_;
 
@@ -21,6 +39,18 @@ sub new {
 
   return bless {cmds => $cmds}, $class;
 }
+
+=method new_from_options
+
+    my $supervisor = App::SuperviseMe->new_from_options;
+
+Reads the list of commands to start and monitor from C<STDIN>. It strips
+white-space from the beggining and end of the line, and skips lines that
+start with a C<#>.
+
+Returns the superviser object.
+
+=cut
 
 sub new_from_options {
   my ($class) = @_;
@@ -43,6 +73,18 @@ sub new_from_options {
 
 ################
 # Start the show
+
+=method run
+
+    $supervisor->run;
+
+Starts the supervisor, start all the child processes and monitors each
+one.
+
+This method returns when the supervisor is stopped with either a SIGINT
+or a SIGTERM.
+
+=cut
 
 sub run {
   my $self = shift;
@@ -142,3 +184,34 @@ sub _error {
 }
 
 1;
+
+__END__
+
+=encoding utf8
+
+=head1 SYNOPSIS
+
+    my $superviser = App::SuperviseMe->new(
+        cmds => [
+          'plackup -p 3010 ./sites/x/app.psgi',
+          'plackup -p 3011 ./sites/y/app.psgi',
+        ],
+    );
+    $superviser->run;
+
+
+=head1 DESCRIPTION
+
+This module implements a multi-process supervisor.
+
+It takes a list of commands to execute and starts each one, and then
+monitors their execution. If one of the program dies, the supervisor
+will restart it after a small 1 second pause.
+
+
+=head1 SEE ALSO
+
+L<AnyEvent>
+
+
+=cut
