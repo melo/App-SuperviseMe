@@ -8,6 +8,8 @@ use warnings;
 use App::SuperviseMe;
 
 # ABSTRACT: supervises a list of commands
+# VERSION
+# AUTHORITY
 
 App::SuperviseMe->new_from_options->run;
 

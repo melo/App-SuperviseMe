@@ -1,6 +1,8 @@
 package App::SuperviseMe;
 
 # ABSTRACT: very simple command superviser
+# VERSION
+# AUTHORITY
 
 use strict;
 use warnings;
