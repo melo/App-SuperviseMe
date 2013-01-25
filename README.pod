@@ -23,8 +23,10 @@ It reads a list of commands to execute from C<STDIN> and starts each one, and
 then monitors their execution. If one of the program dies, the supervisor will
 restart it after a small 1 second pause.
 
-You can exit the superviser with C<CTRL-C>, and all the child supervised
-processes will be killed.
+You can restart the supervised process with C<< Ctrl-C >>. If you hit
+C<< Ctrl-C >> again before the supervised process restart, the supervisor will
+exit. This allows you to use one tap of C<< Ctrl-C >> to restart, and a
+double tap to exit.
 
 
 =head1 ARGUMENTS
@@ -46,3 +48,4 @@ information about the internal workings of the supervisor.
 =head1 SEE ALSO
 
 L<App::SuperviseMe>
+
