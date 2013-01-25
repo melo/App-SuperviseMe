@@ -24,7 +24,8 @@ It accepts a hash with the following options:
 
 =item cmds
 
-A list reference with the commands to execute and monitor.
+A list reference with the commands to execute and monitor. Each command
+can be a scalar, or a list reference.
 
 =back
 
@@ -35,7 +36,10 @@ sub new {
 
   my $cmds = delete($args{cmds}) || [];
   $cmds = [$cmds] unless ref($cmds) eq 'ARRAY';
-  map { $_ = ref($_) ? $_ : {cmd => $_} } @$cmds;
+  for my $cmd (@$cmds) {
+    $cmd = [ $cmd ] unless ref($cmd) eq 'ARRAY';
+    $cmd = { cmd => $cmd };
+  }
 
   croak(q{Missing 'cmds',}) unless @$cmds;
 
@@ -110,7 +114,7 @@ sub run {
 
 sub _start_cmd {
   my ($self, $cmd) = @_;
-  _debug("Starting '$cmd->{cmd}'");
+  _debug("Starting '@{$cmd->{cmd}}'");
 
   my $pid = fork();
   if (!defined $pid) {
@@ -121,13 +125,13 @@ sub _start_cmd {
 
   if ($pid == 0) {    ## Child
     $cmd = $cmd->{cmd};
-    _debug("Exec'ing '$cmd'");
-    exec($cmd);
+    _debug("Exec'ing '@$cmd'");
+    exec(@$cmd);
     exit(1);
   }
 
   ## parent
-  _debug("Watching pid $pid for '$cmd->{cmd}'");
+  _debug("Watching pid $pid for '@{$cmd->{cmd}}'");
   $cmd->{pid} = $pid;
   $cmd->{watcher} = AE::child $pid, sub { $self->_child_exited($cmd, @_) };
 
@@ -136,7 +140,7 @@ sub _start_cmd {
 
 sub _child_exited {
   my ($self, $cmd, undef, $status) = @_;
-  _debug("Child $cmd->{pid} exited, status $status: '$cmd->{cmd}'");
+  _debug("Child $cmd->{pid} exited, status $status: '@{$cmd->{cmd}}'");
 
   delete $cmd->{watcher};
   delete $cmd->{pid};
@@ -148,7 +152,7 @@ sub _child_exited {
 
 sub _restart_cmd {
   my ($self, $cmd) = @_;
-  _debug("Restarting cmd '$cmd->{cmd}' in 1 second");
+  _debug("Restarting cmd '@{$cmd->{cmd}}' in 1 second");
 
   my $t;
   $t = AE::timer 1, 0, sub { $self->_start_cmd($cmd); undef $t };
@@ -197,6 +201,7 @@ __END__
         cmds => [
           'plackup -p 3010 ./sites/x/app.psgi',
           'plackup -p 3011 ./sites/y/app.psgi',
+          ['bash', '-c', '... bash script ...'],
         ],
     );
     $superviser->run;

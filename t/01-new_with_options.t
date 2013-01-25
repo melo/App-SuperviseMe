@@ -17,17 +17,17 @@ subtest 'basic constructor' => sub {
   is(ref($sm), 'App::SuperviseMe', '... of the proper type');
   cmp_deeply(
     $sm->{cmds},
-    [{cmd => 'a'}],
+    [{cmd => ['a']}],
     '... with the expected command list'
   );
 
-  is(exception { $sm = App::SuperviseMe->new(cmds => ['a', {cmd => 'b'}]) },
+  is(exception { $sm = App::SuperviseMe->new(cmds => ['a', ['b']]) },
     undef, 'new() lives with two commands, one simple, one complex');
   ok($sm, '... got something back');
   is(ref($sm), 'App::SuperviseMe', '... of the proper type');
   cmp_deeply(
     $sm->{cmds},
-    [{cmd => 'a'}, {cmd => 'b'}],
+    [{cmd => ['a']}, {cmd => ['b']}],
     '... with the expected command list'
   );
 
@@ -58,7 +58,7 @@ subtest 'read commands from STDIN' => sub {
   is(ref($sm), 'App::SuperviseMe', '... of the proper type');
   cmp_deeply(
     $sm->{cmds},
-    [{cmd => 'x1',}, {cmd => 'x2',}],
+    [{cmd => ['x1']}, {cmd => ['x2']}],
     '... with the expected cmds list'
   );
 };
