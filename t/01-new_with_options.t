@@ -30,9 +30,9 @@ subtest 'basic constructor' => sub {
 subtest 'read commands from STDIN' => sub {
   local *STDIN = my $io = IO::String->new(<<"  EOF");
  x1
-   
-     # asdasdasd 
-      x2 
+
+     # asdasdasd
+      x2
 
   EOF
   my $sm = App::SuperviseMe->new_from_options;
