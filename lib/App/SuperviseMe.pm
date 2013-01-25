@@ -160,7 +160,7 @@ sub _signal_all_cmds {
   for my $cmd (@{$self->{cmds}}) {
     next unless my $pid = $cmd->{pid};
     _debug("... sent signal $signal to $pid");
-    kill($signal, $cmd->{pid}) if $pid;
+    kill($signal, $pid);
   }
 }
 
