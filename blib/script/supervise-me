@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-package ## Hide from PAUSE and Dist::Zilla
+package    ## Hide from PAUSE and Dist::Zilla
   supervise_me;
 
 use strict;
@@ -8,7 +8,7 @@ use warnings;
 use App::SuperviseMe;
 
 # ABSTRACT: supervises a list of commands
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 our $AUTHORITY = 'cpan:MELO'; # AUTHORITY
 
 App::SuperviseMe->new_from_options->run;
@@ -27,7 +27,7 @@ supervise_me - supervises a list of commands
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -48,12 +48,14 @@ version 0.002
 
 The C<supervise_me> command is a simple supervisor for multiple process.
 
-It reads a list of commands to execute from C<STDIN> and starts each one,
+It reads a list of commands to execute from C<< STDIN >> and starts each one,
 and then monitors their execution. If one of the program dies, the supervisor
 will restart it after a small 1 second pause.
 
-You can exit the superviser with C<CTRL-C>, and all the child supervised
-processes will be killed.
+You can restart the supervised process with C<< Ctrl-C >>. If you hit
+C<< Ctrl-C >> again before the supervised process restart, the supervisor will
+exit. This allows you to use one tap of C<< Ctrl-C >> to restart, and a
+double tap to exit.
 
 =encoding utf8
 

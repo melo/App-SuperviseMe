@@ -63,7 +63,7 @@
    "provides" : {
       "App::SuperviseMe" : {
          "file" : "lib/App/SuperviseMe.pm",
-         "version" : "0.002"
+         "version" : "0.003"
       }
    },
    "release_status" : "stable",
@@ -71,14 +71,14 @@
       "bugtracker" : {
          "web" : "https://github.com/melo/App-SuperviseMe/issues"
       },
-      "homepage" : "http://search.cpan.org/dist/App-SuperviseMe/",
+      "homepage" : "http://metacpan.org/release/App-SuperviseMe/",
       "repository" : {
          "type" : "git",
          "url" : "git://github.com/melo/App-SuperviseMe.git",
          "web" : "https://github.com/melo/App-SuperviseMe"
       }
    },
-   "version" : "0.002",
+   "version" : "0.003",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.014002"

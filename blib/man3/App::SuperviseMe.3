@@ -142,7 +142,7 @@
 App::SuperviseMe \- very simple command superviser
 .SH "VERSION"
 .IX Header "VERSION"
-version 0.002
+version 0.003
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
 .Vb 8
@@ -162,6 +162,13 @@ This module implements a multi-process supervisor.
 It takes a list of commands to execute and starts each one, and then monitors
 their execution. If one of the program dies, the supervisor will restart it
 after a small 1 second pause.
+.PP
+You can send \s-1SIGTERM\s0 to the supervisor process to kill all childs and exit.
+.PP
+You can also send \s-1SIGINT \s0(Ctrl-C on your terminal) to restart the processes. If
+a second \s-1SIGINT\s0 is received and no child process is currently running, the
+supervisor will exit. This allows you to tap Ctrl\- C twice in quick succession
+in a terminal window to terminate the supervisor and all child processes
 .SH "METHODS"
 .IX Header "METHODS"
 .SS "new"

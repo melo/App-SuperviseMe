@@ -12,6 +12,7 @@ dist.ini
 lib/App/SuperviseMe.pm
 t/00-compile.t
 t/01-new_with_options.t
+tidyall.ini
 xt/author/test-eol.t
 xt/release/cpan-changes.t
 xt/release/dist-manifest.t

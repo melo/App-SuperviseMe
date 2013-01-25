@@ -1,7 +1,7 @@
 package App::SuperviseMe;
 
 # ABSTRACT: very simple command superviser
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 our $AUTHORITY = 'cpan:MELO'; # AUTHORITY
 
 use strict;
@@ -53,7 +53,7 @@ sub run {
   my $self = shift;
   my $sv   = AE::cv;
 
-  my $int_s  = AE::signal 'INT'  => sub { $self->_signal_all_cmds('INT');  $sv->send };
+  my $int_s = AE::signal 'INT' => sub { $self->_signal_all_cmds('INT', $sv); };
   my $term_s = AE::signal 'TERM' => sub { $self->_signal_all_cmds('TERM'); $sv->send };
 
   for my $cmd (@{ $self->{cmds} }) {
@@ -114,13 +114,20 @@ sub _restart_cmd {
 }
 
 sub _signal_all_cmds {
-  my ($self, $signal) = @_;
-  _debug("Received signal $signal, exiting");
+  my ($self, $signal, $cv) = @_;
+  _debug("Received signal $signal");
+  my $is_any_alive = 0;
   for my $cmd (@{ $self->{cmds} }) {
     next unless my $pid = $cmd->{pid};
     _debug("... sent signal $signal to $pid");
+    $is_any_alive++;
     kill($signal, $pid);
   }
+
+  return if $cv and $is_any_alive;
+
+  _debug('Exiting...');
+  $cv->send if $cv;
 }
 
 
@@ -161,7 +168,7 @@ App::SuperviseMe - very simple command superviser
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -181,6 +188,13 @@ This module implements a multi-process supervisor.
 It takes a list of commands to execute and starts each one, and then monitors
 their execution. If one of the program dies, the supervisor will restart it
 after a small 1 second pause.
+
+You can send SIGTERM to the supervisor process to kill all childs and exit.
+
+You can also send SIGINT (Ctrl-C on your terminal) to restart the processes. If
+a second SIGINT is received and no child process is currently running, the
+supervisor will exit. This allows you to tap Ctrl- C twice in quick succession
+in a terminal window to terminate the supervisor and all child processes
 
 =encoding utf8
 
