@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
-package
-    supervise_me;
+package ## Hide from PAUSE and Dist::Zilla
+  supervise_me;
 
 use strict;
 use warnings;
@@ -37,7 +37,7 @@ version 0.002
     plackup -p 3010 ./sites/x/app.psgi
     plackup -p 3011 ./sites/y/app.psgi
     ^D
-    
+
     # Script it
     $ cat script.me
     plackup -p 3010 ./sites/x/app.psgi
