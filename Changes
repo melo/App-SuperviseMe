@@ -1,6 +1,7 @@
 Revision history for App-SuperviseMe
  
-0.002     2013-01-25T11:30:55Z
+0.002     2013-01-25T11:53:06Z
+  * Add support for commands as list references
 
 0.001     2011-05-25 18:13:00 Europe/Lisbon
   * Initial release

@@ -8,6 +8,8 @@ use warnings;
 use App::SuperviseMe;
 
 # ABSTRACT: supervises a list of commands
+our $VERSION = '0.002'; # VERSION
+our $AUTHORITY = 'cpan:MELO'; # AUTHORITY
 
 App::SuperviseMe->new_from_options->run;
 
