@@ -33,15 +33,15 @@ no_index:
 provides:
   App::SuperviseMe:
     file: lib/App/SuperviseMe.pm
-    version: 0.002
+    version: 0.003
 requires:
   AnyEvent: 0
   perl: 5.006
 resources:
   bugtracker: https://github.com/melo/App-SuperviseMe/issues
-  homepage: http://search.cpan.org/dist/App-SuperviseMe/
+  homepage: http://metacpan.org/release/App-SuperviseMe/
   repository: git://github.com/melo/App-SuperviseMe.git
-version: 0.002
+version: 0.003
 x_Dist_Zilla:
   perl:
     version: 5.014002
