@@ -31,6 +31,15 @@
       ]
    },
    "prereqs" : {
+      "build" : {
+         "requires" : {
+            "File::Temp" : "0",
+            "IO::String" : "0",
+            "Test::Deep" : "0",
+            "Test::Fatal" : "0",
+            "Test::More" : "0.98"
+         }
+      },
       "configure" : {
          "requires" : {
             "ExtUtils::MakeMaker" : "6.30"
@@ -46,8 +55,7 @@
       },
       "runtime" : {
          "requires" : {
-            "AnyEvent" : "0",
-            "perl" : "5.006"
+            "AnyEvent" : "0"
          }
       },
       "test" : {
@@ -411,4 +419,3 @@
    },
    "x_authority" : "cpan:MELO"
 }
-

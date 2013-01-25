@@ -2,37 +2,37 @@
 use strict;
 use warnings;
 
-
+use 5.006;
 
 use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'very simple command superviser',
-  'AUTHOR' => 'Pedro Melo <melo@simplicidade.org>',
-  'BUILD_REQUIRES' => {
-    'IO::String' => '0',
-    'Test::Deep' => '0',
-    'Test::Fatal' => '0',
-    'Test::More' => '0.96'
+  "ABSTRACT" => "very simple command superviser",
+  "AUTHOR" => "Pedro Melo <melo\@simplicidade.org>",
+  "BUILD_REQUIRES" => {
+    "File::Temp" => 0,
+    "IO::String" => 0,
+    "Test::Deep" => 0,
+    "Test::Fatal" => 0,
+    "Test::More" => "0.98"
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'App-SuperviseMe',
-  'EXE_FILES' => [
-    'bin/supervise-me'
+  "DISTNAME" => "App-SuperviseMe",
+  "EXE_FILES" => [
+    "bin/supervise-me"
   ],
-  'LICENSE' => 'artistic_2',
-  'NAME' => 'App::SuperviseMe',
-  'PREREQ_PM' => {
-    'AnyEvent' => '5.0',
-    'Carp' => '0'
+  "LICENSE" => "artistic_2",
+  "NAME" => "App::SuperviseMe",
+  "PREREQ_PM" => {
+    "AnyEvent" => 0
   },
-  'VERSION' => '0.001',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.002",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

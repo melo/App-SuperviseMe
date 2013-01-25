@@ -36,7 +36,6 @@ provides:
     version: 0.002
 requires:
   AnyEvent: 0
-  perl: 5.006
 resources:
   bugtracker: https://github.com/melo/App-SuperviseMe/issues
   homepage: http://search.cpan.org/dist/App-SuperviseMe/
