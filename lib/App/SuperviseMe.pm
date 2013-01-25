@@ -12,51 +12,20 @@ use AnyEvent;
 ##############
 # Constructors
 
-=method new
-
-    my $supervisor = App::SuperviseMe->new( cmds => [...]);
-
-Creates a supervisor instance with a list of commands to monitor.
-
-It accepts a hash with the following options:
-
-=over 4
-
-=item cmds
-
-A list reference with the commands to execute and monitor. Each command
-can be a scalar, or a list reference.
-
-=back
-
-=cut
-
 sub new {
   my ($class, %args) = @_;
 
   my $cmds = delete($args{cmds}) || [];
   $cmds = [$cmds] unless ref($cmds) eq 'ARRAY';
   for my $cmd (@$cmds) {
-    $cmd = [ $cmd ] unless ref($cmd) eq 'ARRAY';
+    $cmd = [$cmd] unless ref($cmd) eq 'ARRAY';
     $cmd = { cmd => $cmd };
   }
 
   croak(q{Missing 'cmds',}) unless @$cmds;
 
-  return bless {cmds => $cmds}, $class;
+  return bless { cmds => $cmds }, $class;
 }
-
-=method new_from_options
-
-    my $supervisor = App::SuperviseMe->new_from_options;
-
-Reads the list of commands to start and monitor from C<STDIN>. It strips
-white-space from the beggining and end of the line, and skips lines that
-start with a C<#>.
-
-Returns the superviser object.
-
-=cut
 
 sub new_from_options {
   my ($class) = @_;
@@ -80,28 +49,14 @@ sub new_from_options {
 ################
 # Start the show
 
-=method run
-
-    $supervisor->run;
-
-Starts the supervisor, start all the child processes and monitors each
-one.
-
-This method returns when the supervisor is stopped with either a SIGINT
-or a SIGTERM.
-
-=cut
-
 sub run {
   my $self = shift;
   my $sv   = AE::cv;
 
-  my $int_s =
-    AE::signal 'INT' => sub { $self->_signal_all_cmds('INT'); $sv->send };
-  my $term_s =
-    AE::signal 'TERM' => sub { $self->_signal_all_cmds('TERM'); $sv->send };
+  my $int_s  = AE::signal 'INT'  => sub { $self->_signal_all_cmds('INT');  $sv->send };
+  my $term_s = AE::signal 'TERM' => sub { $self->_signal_all_cmds('TERM'); $sv->send };
 
-  for my $cmd (@{$self->{cmds}}) {
+  for my $cmd (@{ $self->{cmds} }) {
     $self->_start_cmd($cmd);
   }
 
@@ -161,7 +116,7 @@ sub _restart_cmd {
 sub _signal_all_cmds {
   my ($self, $signal) = @_;
   _debug("Received signal $signal, exiting");
-  for my $cmd (@{$self->{cmds}}) {
+  for my $cmd (@{ $self->{cmds} }) {
     next unless my $pid = $cmd->{pid};
     _debug("... sent signal $signal to $pid");
     kill($signal, $pid);
@@ -211,9 +166,50 @@ __END__
 
 This module implements a multi-process supervisor.
 
-It takes a list of commands to execute and starts each one, and then
-monitors their execution. If one of the program dies, the supervisor
-will restart it after a small 1 second pause.
+It takes a list of commands to execute and starts each one, and then monitors
+their execution. If one of the program dies, the supervisor will restart it
+after a small 1 second pause.
+
+
+=head1 METHODS
+
+=head2 new
+
+    my $supervisor = App::SuperviseMe->new( cmds => [...]);
+
+Creates a supervisor instance with a list of commands to monitor.
+
+It accepts a hash with the following options:
+
+=over 4
+
+=item cmds
+
+A list reference with the commands to execute and monitor. Each command can be
+a scalar, or a list reference.
+
+=back
+
+
+=head2 new_from_options
+
+    my $supervisor = App::SuperviseMe->new_from_options;
+
+Reads the list of commands to start and monitor from C<STDIN>. It strips
+white-space from the beggining and end of the line, and skips lines that start
+with a C<#>.
+
+Returns the superviser object.
+
+
+=head2 run
+
+    $supervisor->run;
+
+Starts the supervisor, start all the child processes and monitors each one.
+
+This method returns when the supervisor is stopped with either a SIGINT or a
+SIGTERM.
 
 
 =head1 SEE ALSO
