@@ -11,9 +11,13 @@ use App::SuperviseMe;
 
 App::SuperviseMe->new_from_options->run;
 
-
+__END__
 
 =pod
+
+=encoding utf-8
+
+=for :stopwords Pedro Melo ACKNOWLEDGEMENTS
 
 =head1 NAME
 
@@ -78,10 +82,6 @@ This software is Copyright (c) 2011 by Pedro Melo.
 
 This is free software, licensed under:
 
-  The Artistic License 2.0
+  The Artistic License 2.0 (GPL Compatible)
 
 =cut
-
-
-__END__
-
