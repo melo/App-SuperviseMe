@@ -226,11 +226,6 @@
             "version" : "1.001"
          },
          {
-            "class" : "Dist::Zilla::Plugin::Test::UnusedVars",
-            "name" : "@Author::MELO/@TestingMania/Test::UnusedVars",
-            "version" : "2.000003"
-         },
-         {
             "class" : "Dist::Zilla::Plugin::Test::Synopsis",
             "name" : "@Author::MELO/@TestingMania/Test::Synopsis",
             "version" : "2.000002"
