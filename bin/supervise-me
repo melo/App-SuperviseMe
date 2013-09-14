@@ -8,7 +8,7 @@ use warnings;
 use App::SuperviseMe;
 
 # ABSTRACT: supervises a list of commands
-our $VERSION = '0.003'; # VERSION
+our $VERSION = '0.004'; # VERSION
 our $AUTHORITY = 'cpan:MELO'; # AUTHORITY
 
 App::SuperviseMe->new_from_options->run;
@@ -27,7 +27,7 @@ supervise_me - supervises a list of commands
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
