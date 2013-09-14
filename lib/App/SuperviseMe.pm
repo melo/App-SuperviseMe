@@ -24,7 +24,10 @@ sub new {
 
   croak(q{Missing 'cmds',}) unless @$cmds;
 
-  return bless { cmds => $cmds }, $class;
+  return bless {
+    cmds => $cmds,
+    debug => $ENV{SUPERVISE_ME_DEBUG} || $args{debug} || 0,
+  }, $class;
 }
 
 sub new_from_options {
@@ -69,24 +72,24 @@ sub run {
 
 sub _start_cmd {
   my ($self, $cmd) = @_;
-  _debug("Starting '@{$cmd->{cmd}}'");
+  $self->_debug("Starting '@{$cmd->{cmd}}'");
 
   my $pid = fork();
   if (!defined $pid) {
-    _debug("fork() failed: $!");
+    $self->_debug("fork() failed: $!");
     $self->_restart_cmd($cmd);
     return;
   }
 
   if ($pid == 0) {    ## Child
     $cmd = $cmd->{cmd};
-    _debug("Exec'ing '@$cmd'");
+    $self->_debug("Exec'ing '@$cmd'");
     exec(@$cmd);
     exit(1);
   }
 
   ## parent
-  _debug("Watching pid $pid for '@{$cmd->{cmd}}'");
+  $self->_debug("Watching pid $pid for '@{$cmd->{cmd}}'");
   $cmd->{pid} = $pid;
   $cmd->{watcher} = AE::child $pid, sub { $self->_child_exited($cmd, @_) };
 
@@ -95,7 +98,7 @@ sub _start_cmd {
 
 sub _child_exited {
   my ($self, $cmd, undef, $status) = @_;
-  _debug("Child $cmd->{pid} exited, status $status: '@{$cmd->{cmd}}'");
+  $self->_debug("Child $cmd->{pid} exited, status $status: '@{$cmd->{cmd}}'");
 
   delete $cmd->{watcher};
   delete $cmd->{pid};
@@ -107,7 +110,7 @@ sub _child_exited {
 
 sub _restart_cmd {
   my ($self, $cmd) = @_;
-  _debug("Restarting cmd '@{$cmd->{cmd}}' in 1 second");
+  $self->_debug("Restarting cmd '@{$cmd->{cmd}}' in 1 second");
 
   my $t;
   $t = AE::timer 1, 0, sub { $self->_start_cmd($cmd); undef $t };
@@ -115,18 +118,18 @@ sub _restart_cmd {
 
 sub _signal_all_cmds {
   my ($self, $signal, $cv) = @_;
-  _debug("Received signal $signal");
+  $self->_debug("Received signal $signal");
   my $is_any_alive = 0;
   for my $cmd (@{ $self->{cmds} }) {
     next unless my $pid = $cmd->{pid};
-    _debug("... sent signal $signal to $pid");
+    $self->_debug("... sent signal $signal to $pid");
     $is_any_alive++;
     kill($signal, $pid);
   }
 
   return if $cv and $is_any_alive;
 
-  _debug('Exiting...');
+  $self->_debug('Exiting...');
   $cv->send if $cv;
 }
 
@@ -141,12 +144,14 @@ sub _out {
 }
 
 sub _debug {
-  return unless $ENV{SUPERVISE_ME_DEBUG};
+  my $self = shift;
+  return unless $self->{debug};
 
   print STDERR "DEBUG [$$] ", @_, "\n";
 }
 
 sub _error {
+  shift;
   print "ERROR: ", @_, "\n";
   return;
 }
@@ -189,7 +194,7 @@ in a terminal window to terminate the supervisor and all child processes
 
 =head2 new
 
-    my $supervisor = App::SuperviseMe->new( cmds => [...]);
+    my $supervisor = App::SuperviseMe->new( cmds => [...], [debug => ...]);
 
 Creates a supervisor instance with a list of commands to monitor.
 
@@ -201,6 +206,10 @@ It accepts a hash with the following options:
 
 A list reference with the commands to execute and monitor. Each command can be
 a scalar, or a list reference.
+
+=item debug
+
+Print debug information if true. ENV SUPERVISE_ME_DEBUG overrides this setting. Disabled by default.
 
 =back
 
