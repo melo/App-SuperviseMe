@@ -4,7 +4,7 @@
       "Pedro Melo <melo@simplicidade.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300038, CPAN::Meta::Converter version 2.132510",
    "license" : [
       "artistic_2"
    ],
@@ -39,7 +39,9 @@
       "develop" : {
          "requires" : {
             "Pod::Coverage::TrustPod" : "0",
+            "Test::CPAN::Changes" : "0.19",
             "Test::CPAN::Meta" : "0",
+            "Test::Kwalitee" : "1.08",
             "Test::Pod" : "1.41",
             "Test::Pod::Coverage" : "1.08"
          }
@@ -63,7 +65,7 @@
    "provides" : {
       "App::SuperviseMe" : {
          "file" : "lib/App/SuperviseMe.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       }
    },
    "release_status" : "stable",
@@ -78,7 +80,7 @@
          "web" : "https://github.com/melo/App-SuperviseMe"
       }
    },
-   "version" : "0.003",
+   "version" : "0.004",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.014002"
@@ -87,47 +89,47 @@
          {
             "class" : "Dist::Zilla::Plugin::GitHub::Meta",
             "name" : "@Author::MELO/@GitHub/GitHub::Meta",
-            "version" : "0.30"
+            "version" : "0.35"
          },
          {
             "class" : "Dist::Zilla::Plugin::GitHub::Update",
             "name" : "@Author::MELO/@GitHub/GitHub::Update",
-            "version" : "0.30"
+            "version" : "0.35"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::NextVersion",
             "name" : "@Author::MELO/Git::NextVersion",
-            "version" : "2.006"
+            "version" : "2.014"
          },
          {
             "class" : "Dist::Zilla::Plugin::GenerateFile",
             "name" : "@Author::MELO/GenerateManifestSkip",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::GenerateFile",
             "name" : "@Author::MELO/GenerateTravisCfg",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::GatherDir",
             "name" : "@Author::MELO/GatherDir",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::PruneCruft",
             "name" : "@Author::MELO/PruneCruft",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::ManifestSkip",
             "name" : "@Author::MELO/ManifestSkip",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::PruneFiles",
             "name" : "@Author::MELO/PruneRepoMetaFiles",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::Authority",
@@ -137,42 +139,42 @@
          {
             "class" : "Dist::Zilla::Plugin::NextRelease",
             "name" : "@Author::MELO/NextRelease",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::OurPkgVersion",
             "name" : "@Author::MELO/OurPkgVersion",
-            "version" : "0.004000"
+            "version" : "0.005000"
          },
          {
             "class" : "Dist::Zilla::Plugin::PodWeaver",
             "name" : "@Author::MELO/PodWeaver",
-            "version" : "3.101641"
+            "version" : "3.101642"
          },
          {
             "class" : "Dist::Zilla::Plugin::License",
             "name" : "@Author::MELO/License",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::Readme",
             "name" : "@Author::MELO/Readme",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::AutoPrereqs",
             "name" : "@Author::MELO/AutoPrereqs",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaNoIndex",
             "name" : "@Author::MELO/MetaNoIndex",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaProvides::Package",
             "name" : "@Author::MELO/MetaProvides::Package",
-            "version" : "1.14000001"
+            "version" : "1.14000003"
          },
          {
             "class" : "Dist::Zilla::Plugin::MinimumPerl",
@@ -182,17 +184,17 @@
          {
             "class" : "Dist::Zilla::Plugin::MetaConfig",
             "name" : "@Author::MELO/MetaConfig",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaYAML",
             "name" : "@Author::MELO/MetaYAML",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaJSON",
             "name" : "@Author::MELO/MetaJSON",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::Prereqs",
@@ -203,22 +205,22 @@
                }
             },
             "name" : "@Author::MELO/TestMoreWithSubtests",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::ExecDir",
             "name" : "@Author::MELO/ExecDir",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::ShareDir",
             "name" : "@Author::MELO/ShareDir",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::MakeMaker",
             "name" : "@Author::MELO/MakeMaker",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Pod::No404s",
@@ -228,7 +230,7 @@
          {
             "class" : "Dist::Zilla::Plugin::Test::Synopsis",
             "name" : "@Author::MELO/@TestingMania/Test::Synopsis",
-            "version" : "2.000002"
+            "version" : "2.000004"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Version",
@@ -238,12 +240,12 @@
          {
             "class" : "Dist::Zilla::Plugin::PodCoverageTests",
             "name" : "@Author::MELO/@TestingMania/PodCoverageTests",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::CPAN::Changes",
             "name" : "@Author::MELO/@TestingMania/Test::CPAN::Changes",
-            "version" : "0.005"
+            "version" : "0.008"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::CPAN::Meta::JSON",
@@ -253,22 +255,32 @@
          {
             "class" : "Dist::Zilla::Plugin::Test::DistManifest",
             "name" : "@Author::MELO/@TestingMania/Test::DistManifest",
-            "version" : "2.000002"
+            "version" : "2.000004"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaTests",
             "name" : "@Author::MELO/@TestingMania/MetaTests",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Compile",
+            "config" : {
+               "Dist::Zilla::Plugin::Test::Compile" : {
+                  "module_finder" : [
+                     ":InstallModules"
+                  ],
+                  "script_finder" : [
+                     ":ExecFiles"
+                  ]
+               }
+            },
             "name" : "@Author::MELO/@TestingMania/Test::Compile",
-            "version" : "1.112820"
+            "version" : "2.030"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Kwalitee",
             "name" : "@Author::MELO/@TestingMania/Test::Kwalitee",
-            "version" : "2.03"
+            "version" : "2.06"
          },
          {
             "class" : "Dist::Zilla::Plugin::NoTabsTests",
@@ -278,7 +290,7 @@
          {
             "class" : "Dist::Zilla::Plugin::Test::MinimumVersion",
             "name" : "@Author::MELO/@TestingMania/Test::MinimumVersion",
-            "version" : "2.000002"
+            "version" : "2.000005"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Pod::LinkCheck",
@@ -288,27 +300,27 @@
          {
             "class" : "Dist::Zilla::Plugin::Test::EOL",
             "name" : "@Author::MELO/@TestingMania/Test::EOL",
-            "version" : "0.07"
+            "version" : "0.08"
          },
          {
             "class" : "Dist::Zilla::Plugin::PodSyntaxTests",
             "name" : "@Author::MELO/@TestingMania/PodSyntaxTests",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::MojibakeTests",
             "name" : "@Author::MELO/@TestingMania/MojibakeTests",
-            "version" : "0.3"
+            "version" : "0.5"
          },
          {
             "class" : "Dist::Zilla::Plugin::Manifest",
             "name" : "@Author::MELO/Manifest",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::CheckExtraTests",
             "name" : "@Author::MELO/CheckExtraTests",
-            "version" : "0.007"
+            "version" : "0.011"
          },
          {
             "class" : "Dist::Zilla::Plugin::CheckChangesHasContent",
@@ -318,42 +330,42 @@
          {
             "class" : "Dist::Zilla::Plugin::TestRelease",
             "name" : "@Author::MELO/TestRelease",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::ConfirmRelease",
             "name" : "@Author::MELO/ConfirmRelease",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::UploadToCPAN",
             "name" : "@Author::MELO/UploadToCPAN",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::CommitBuild",
             "name" : "@Author::MELO/Git::CommitBuild",
-            "version" : "2.006"
+            "version" : "2.014"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Check",
             "name" : "@Author::MELO/@Git/Check",
-            "version" : "2.006"
+            "version" : "2.014"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Commit",
             "name" : "@Author::MELO/@Git/Commit",
-            "version" : "2.006"
+            "version" : "2.014"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Tag",
             "name" : "@Author::MELO/@Git/Tag",
-            "version" : "2.006"
+            "version" : "2.014"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Push",
             "name" : "@Author::MELO/@Git/Push",
-            "version" : "2.006"
+            "version" : "2.014"
          },
          {
             "class" : "Dist::Zilla::Plugin::InstallRelease",
@@ -373,32 +385,32 @@
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":InstallModules",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":IncModules",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":TestFiles",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":ExecFiles",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":ShareFiles",
-            "version" : "4.300029"
+            "version" : "4.300038"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":MainModule",
-            "version" : "4.300029"
+            "version" : "4.300038"
          }
       ],
       "zilla" : {
@@ -406,7 +418,7 @@
          "config" : {
             "is_trial" : "0"
          },
-         "version" : "4.300029"
+         "version" : "4.300038"
       }
    },
    "x_authority" : "cpan:MELO"
