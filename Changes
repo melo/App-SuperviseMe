@@ -1,6 +1,8 @@
 Revision history for App-SuperviseMe
  
 {{$NEXT}}
+  * cleanup debug management, add debug option to new
+  * add new progress option to new
 
 0.003     2013-01-25T12:26:02Z
   * Add double Ctrl-C to exit supervisor feature
