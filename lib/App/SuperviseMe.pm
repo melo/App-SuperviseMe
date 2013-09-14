@@ -27,6 +27,7 @@ sub new {
   return bless {
     cmds => $cmds,
     debug => $ENV{SUPERVISE_ME_DEBUG} || $args{debug} || 0,
+    progress => $args{progress} || 0,
   }, $class;
 }
 
@@ -72,7 +73,7 @@ sub run {
 
 sub _start_cmd {
   my ($self, $cmd) = @_;
-  $self->_debug("Starting '@{$cmd->{cmd}}'");
+  $self->_progress("Starting '@{$cmd->{cmd}}'");
 
   my $pid = fork();
   if (!defined $pid) {
@@ -110,7 +111,7 @@ sub _child_exited {
 
 sub _restart_cmd {
   my ($self, $cmd) = @_;
-  $self->_debug("Restarting cmd '@{$cmd->{cmd}}' in 1 second");
+  $self->_progress("Restarting cmd '@{$cmd->{cmd}}' in 1 second");
 
   my $t;
   $t = AE::timer 1, 0, sub { $self->_start_cmd($cmd); undef $t };
@@ -129,7 +130,7 @@ sub _signal_all_cmds {
 
   return if $cv and $is_any_alive;
 
-  $self->_debug('Exiting...');
+  $self->_progress('Exiting...');
   $cv->send if $cv;
 }
 
@@ -141,6 +142,14 @@ sub _out {
   return unless -t \*STDOUT && -t \*STDIN;
 
   print @_, "\n";
+}
+
+sub _progress {
+  my $self = shift;
+  return unless $self->{progress};
+
+  print @_, "\n";
+  $self->_debug('progress msg: ', @_);
 }
 
 sub _debug {
@@ -206,6 +215,10 @@ It accepts a hash with the following options:
 
 A list reference with the commands to execute and monitor. Each command can be
 a scalar, or a list reference.
+
+=item progress
+
+Print progress information if true. Disabled by default.
 
 =item debug
 
