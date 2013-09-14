@@ -77,7 +77,7 @@ sub _start_cmd {
 
   my $pid = fork();
   if (!defined $pid) {
-    $self->_debug("fork() failed: $!");
+    $self->_error("fork() failed: $!");
     $self->_restart_cmd($cmd);
     return;
   }
