@@ -25,7 +25,7 @@ sub new {
   croak(q{Missing 'cmds',}) unless @$cmds;
 
   return bless {
-    cmds => $cmds,
+    cmds  => $cmds,
     debug => $ENV{SUPERVISE_ME_DEBUG} || $args{debug} || 0,
     progress => $args{progress} || 0,
   }, $class;
